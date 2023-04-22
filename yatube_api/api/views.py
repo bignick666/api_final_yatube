@@ -12,9 +12,7 @@ from api.permissions import AuthorOrReadOnly
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = (AuthorOrReadOnly,
-                          permissions.IsAuthenticatedOrReadOnly,
-                          permissions.IsAuthenticated)
+    permission_classes = (AuthorOrReadOnly,)
     pagination_class = LimitOffsetPagination
 
     def perform_create(self, serializer):
@@ -29,9 +27,7 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
 
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
-    permission_classes = (AuthorOrReadOnly,
-                          permissions.IsAuthenticatedOrReadOnly,
-                          permissions.IsAuthenticated)
+    permission_classes = (AuthorOrReadOnly,)
 
     def get_queryset(self):
         post_id = self.kwargs.get("post_id")
